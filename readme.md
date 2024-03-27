@@ -1,10 +1,20 @@
 <html>
-<h1>Connecting AS5600 magnetic encoder to Raspberry Pi</h1>
-<img src="breadboard.jpg">
-This turns out to be quite simple, but I foudn no examples for it on the internet,
-so I decided to add this github page so others can find it.
+<h1>Connecting AS5600 magnetic encoder to Raspberry Pi, using Python</h1>
+
+The AS5600 chip is a magnetic rotary encoder, containing two hall effect sensors
+tha enalbe it to accurately measure the angle and magnitude of a magnetic field.
 <p>
-<b>Connections:
+Rotating a magnet above the chip allows it to act as a rotary encoder.
+<p>
+<img src="img/breadboard.jpg">
+Talking to the AS5600 turns out to be simple, but I found no example code for
+this on the internet.  I always prefer to start with a working example before
+changing any code.
+<p>
+So I added this github repository as an example for others to find as a starting point.
+<p>
+<br><p>
+<b>Physical wring to Raspberry Pi 40-pin GPIO header:</b>
 <table>
 <tr><th>Pi pin<th>Pi function<th>AS5600 board
 <tr><td>01<td>3.3V DC power<td>VCC
@@ -12,7 +22,7 @@ so I decided to add this github page so others can find it.
 <tr><td>05<td>GPIO 03 / I2C SCL<td>SCL
 <tr><td>09<td>Ground<td>GROUND<br>and DIR
 </table>
-<img src="schematic.jpg">
+<img src="img/schematic.jpg">
 The actual code to talk to the AS5600 chip is just 9 lines of python:
 <pre>
 import smbus
@@ -32,4 +42,11 @@ This code is contained in several stand alone python programs in this
 repository which I used for testing the AS5600 chip.
 <p>
 I used a stepper motor to rotate the magnet to check for accuracy.
+<p>
+I found the AS5600 provided good 12 bit precision, with little jitter
+for the rotation angle, but absolute rotational accuracy depends on having
+the magnet exactly centered above the chip.  Without a precision machined
+jig or 3d printed jig, It is unlikely that you will be able to position
+the magnet accurately enough to have less than 1 degree
+error variation over a full rotation.
 
